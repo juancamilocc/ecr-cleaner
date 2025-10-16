@@ -18,7 +18,7 @@ Requirements
 
 ### Configuration
 
-Define your pattern. By default is the next one: [Default Pattern](http://)
+Define your pattern. By default is the next one: [Default Pattern](https://github.com/juancamilocc/ecr-cleaner/blob/main/main.py#L80)
 
 ```python
 full_pattern_image_tag = re.compile(
