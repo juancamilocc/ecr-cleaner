@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ecr-cleaner
+  namespace: default
+spec:
+  schedule: "0 23 * * *" # Change this according to your needs
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 10
+      template:
+        spec:
+          serviceAccountName: ecr-cleaner-sa
+          containers:
+          - name: ecr-cleaner-job
+            image: <your-aws-id>.dkr.ecr.<your-aws-region>.amazonaws.com/<your-ecr-repository-name>:ecr-cleaner # Change this according your ecr
+            args:
+              - "--repository_name" 
+              - "<ECR-repository-name>" # Change this according your ecr
+              - "--region" 
+              - "<your-aws-region>"     # Change this according your region
+              - "--execute"
+          restartPolicy: OnFailure
